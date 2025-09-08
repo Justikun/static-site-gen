@@ -2,8 +2,8 @@ from enum import Enum
 
 class TextType(Enum):
     TEXT        = 'plain'
-    BOLD_TEXT   = 'bold'
-    ITALIC_TEXT = 'italic'
+    BOLD        = 'bold'
+    ITALIC      = 'italic'
     LINK        = 'link'
     IMG_LINK    = 'img_link'
 
