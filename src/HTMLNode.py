@@ -28,3 +28,29 @@ class HTMLNode:
         return final_string
 
 
+class LeafNode(HTMLNode):
+    def __init__(self, tag, value, props=None):
+        super().__init__(tag, value, props)
+
+    def to_html(self):
+        if not self.tag:
+            return self.value
+        if not self.value:
+            raise ValueError("Value cannot be None")
+        return f"<{self.tag}>{self.value}</{self.tag}>"
+
+
+class ParentNode(HTMLNode):
+    def __init__(self, tag, children, props=None):
+        super().__init__(tag, None, children, props)
+
+    def to_html(self):
+        if not self.tag:
+            raise ValueError("tag cannot be None")
+        if not self.children:
+            raise ValueError("children cannot be None")
+
+        result = ""
+        for child in self.children:
+            result += child.to_html()
+        return f"<{self.tag}>{result}</{self.tag}>"
