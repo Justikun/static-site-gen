@@ -3,7 +3,7 @@ from src.inline_markdown import (
     split_nodes_delimiter,
     split_nodes_image,
     split_nodes_link,
-    text_to_textnodes
+    text_to_textnodes, # Import text_to_textnodes from inline_markdown
 )
 
 from src.textnode import TextType, TextNode
