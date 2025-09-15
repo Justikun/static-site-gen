@@ -1,6 +1,6 @@
 import unittest
 
-from src.block_markdown import markdown_to_block, block_to_block_type, BlockType
+from markdown_conversion import markdown_to_block, block_to_block_type, BlockType
 
 class TestMDToBlock(unittest.TestCase):
     def test_markdown_to_blocks(self):
@@ -47,7 +47,7 @@ class TestBlockToBlockType(unittest.TestCase):
         self.assertEqual(block_type, BlockType.HEADING)
 
     def test_ordered(self):
-        text = "1. item tems item\n3. asdl"
+        text = "1. item tems item\n2. asdl"
         block_type = block_to_block_type(text)
         self.assertEqual(block_type, BlockType.ORDERED_LIST)
 

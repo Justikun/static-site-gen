@@ -1,9 +1,26 @@
-from src.textnode import TextNode, TextType
-from src.HTMLNode import LeafNode
+from textnode import TextNode, TextType
 import re
 
 
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
+    """
+    Splits a list of nodes based on a delimiter, creating new nodes with specified text
+
+    :param old_nodes: List of nodes to split.
+    :type old_nodes: list[TextNode]
+
+    :param delimiter: The delimiter used to split the text
+    :type delimiter: str
+
+    :param text_type: The type assigned to the list of nodes
+    :type text_type: TextType
+
+    :return: A new list of nodes with text split into respective sections and types.
+        Original nodes without text-based content are directly appended to the result.
+    :type: list
+    :raises ValueError: If the markdown-like formatted section in any node's text
+        is not properly closed (i.e., if the number of splits by the delimiter is even).
+    """
     new_nodes = []
     for old_node in old_nodes:
         if old_node.text_type != TextType.TEXT:
@@ -22,6 +39,7 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
                 split_nodes.append(TextNode(sections[i], text_type))
         new_nodes.extend(split_nodes)
     return new_nodes
+
 
 def split_nodes_image(old_nodes):
     new_nodes = []
@@ -103,25 +121,6 @@ def split_nodes_link(old_nodes):
             if trailing_text:
                 new_nodes.append(TextNode(trailing_text, TextType.TEXT))
     return new_nodes
-
-
-
-def text_node_to_html_node(text_node):
-    match text_node.text_type:
-        case TextType.TEXT:
-            return LeafNode(None, text_node.text)
-        case TextType.BOLD:
-            return LeafNode("b", text_node.text)
-        case TextType.ITALIC:
-            return LeafNode("i", text_node.text)
-        case TextType.CODE:
-            return LeafNode("code", text_node.text)
-        case TextType.LINK:
-            return LeafNode("a", text_node.text, {"href": text_node.url})
-        case TextType.IMAGE:
-            return LeafNode("img", "", {"src": text_node.url, "alt": text_node.text})
-        case _:
-            raise ValueError(f"invalid text type: {text_node.text_type}")
 
 
 def text_to_textnodes(text):

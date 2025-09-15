@@ -1,5 +1,5 @@
-from src.textnode import TextNode, TextType
-from src.HTMLNode import HTMLNode, LeafNode
+from textnode import TextNode, TextType
+from HTMLNode import HTMLNode, LeafNode
 
 def main():
     node = TextNode("Hello", TextType.LINK,"https://example.com")

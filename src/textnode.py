@@ -1,4 +1,4 @@
-from src.HTMLNode import LeafNode
+from HTMLNode import LeafNode
 from enum import Enum
 
 class TextType(Enum):

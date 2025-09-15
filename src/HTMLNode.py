@@ -2,7 +2,7 @@ class HTMLNode:
     def __init__(self, tag=None, value=None, children=None, props=None):
         """
         :param tag: (str) The type of the node.
-                e.g., html, div, p, h1
+                e.g., div, p, h1
         :param value: (str) The value of the node.
                 e.g., Text in a paragraph
         :param children: (list) The children of the node.
